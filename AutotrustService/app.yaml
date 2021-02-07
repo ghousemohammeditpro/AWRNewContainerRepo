@@ -1,0 +1,9 @@
+runtime: custom
+env: flex
+service: autotrust-service
+network:
+  name: projects/awr-ci-poc/global/networks/awr-ci-poc-vpc-network
+  #subnetwork_name: java-test
+env_variables:
+   MY_VAR_COLOR: 'blue1234'
+   DMZ_URL: 'http://localhost:7101/AutotrustProxy/resources'

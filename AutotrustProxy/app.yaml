@@ -1,0 +1,12 @@
+runtime: custom
+env: flex
+service: autotrust-proxy
+network:
+  name: projects/awr-ci-poc/global/networks/awr-ci-poc-vpc-network
+  #subnetwork_name: java-test
+env_variables:
+  authorization: 'WELCOME$1'
+  tokenValue: 'eyI1NzQ1NGM0MzRmNGQ0NTI0MzEiOiJIUzI1NiIsImFsZyI6IkhTMjU2In0.NTc0NTRjNDM0ZjRkNDUyNDMx.cGwN9jLGMJz53_jUP_eK3pOSmPHwIboE1OMyWUbPu-E'
+  MAIN_URL: 'https://autotrust-service-dot-awr-test-autotrust.ew.r.appspot.com/AutotrustService/resources'
+  AUTOTRUST_SVC_URL_RESERVE: 'https://stage.autotrustuae.com/customapi/AutotrustKenticoApis/ReserveVehicleInKentico'
+  AUTOTRUST_SVC_URL_NOTIFICATION: 'https://stage.autotrustuae.com/customapi/PushNotifications/SendNotifications'
