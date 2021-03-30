@@ -10,20 +10,22 @@ public class PropertiesUtil {
     }
     public String getPropertyValue(String prop){
         String value = null;
-        FileInputStream propertyFile = null;
+        //FileInputStream propertyFile = null;
         
         try {
-            if (System.getProperty("os.name").contains("Windows")) {
-                propertyFile = new FileInputStream(System.getProperty("user.dir") + "\\serviceConfigAutotrust.properties");
+            // if (System.getProperty("os.name").contains("Windows")) {
+            //     propertyFile = new FileInputStream(System.getProperty("user.dir") + "\\serviceConfigAutotrust.properties");
 
-            } else {
-                propertyFile = new FileInputStream(System.getProperty("user.dir") + "/serviceConfigAutotrust.properties");
-            }
-            Properties properties = new Properties();
-            properties.load(propertyFile);
-            propertyFile.close();
+            // } else {
+            //     propertyFile = new FileInputStream(System.getProperty("user.dir") + "/serviceConfigAutotrust.properties");
+            // }
+            // Properties properties = new Properties();
+            // properties.load(propertyFile);
+            // propertyFile.close();
             
-            value = properties.getProperty(prop);
+            // value = properties.getProperty(prop);
+
+            value = System.getenv(prop);
         } catch (Exception e) {
             e.printStackTrace();
         }

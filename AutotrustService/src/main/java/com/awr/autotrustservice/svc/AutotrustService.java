@@ -3424,7 +3424,7 @@ public class AutotrustService {
                     
                     System.out.println("in internal service reserveVehicle");
 
-                    String serviceURL = propUtil.getPropertyValue("DMZ_URL")+"/autotrustProxy/reserveVehicleProxy";
+                    String serviceURL = System.getenv("DMZ_URL")+"/autotrustProxy/reserveVehicleProxy";
                     System.out.println("ReserveVehicleInKentico service url is : "+serviceURL);
                     System.out.println("request form internal : "+gson.toJson(req));
                     String responseString = RestUtil.callPutServiceWithAppName(serviceURL, gson.toJson(req),appName);
@@ -3466,7 +3466,7 @@ public class AutotrustService {
                     
                     System.out.println("in internal service sendNotification");
 
-                    String serviceURL = propUtil.getPropertyValue("DMZ_URL")+"/autotrustProxy/sendNotificationProxy";
+                    String serviceURL = System.getenv("DMZ_URL")+"/autotrustProxy/sendNotificationProxy";
                     System.out.println("SendSandboxNotifications service url is : "+serviceURL);
                     System.out.println("request form internal : "+gson.toJson(req));
                     String responseString = RestUtil.callPutServiceWithAppName(serviceURL, gson.toJson(req),appName);

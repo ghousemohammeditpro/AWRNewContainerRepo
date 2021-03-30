@@ -16,12 +16,12 @@ public class NotificationExceptionLogger {
     }
     public void callAudit(LogData logData) {
       
-        
-        PropertiesUtil propUtil= new PropertiesUtil();
-        String soapEndpointUrl = propUtil.getPropertyValue("soapUrlException");
+        //commented as part of GCP migration
+        // PropertiesUtil propUtil= new PropertiesUtil();
+        // String soapEndpointUrl = System.getenv("soapUrlException");
       
     
-        callSoapWebService(soapEndpointUrl,logData);
+        // callSoapWebService(soapEndpointUrl,logData);
     }
     
     
