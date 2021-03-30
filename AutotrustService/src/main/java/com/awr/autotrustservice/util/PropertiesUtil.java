@@ -10,7 +10,7 @@ public class PropertiesUtil {
     }
     public String getPropertyValue(String prop){
         String value = null;
-        FileInputStream propertyFile = null;
+        //FileInputStream propertyFile = null;
         
         try {
             // if (System.getProperty("os.name").contains("Windows")) {

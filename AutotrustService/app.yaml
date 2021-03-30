@@ -12,10 +12,3 @@ env_variables:
 # manual scaling is not required in production
 manual_scaling:
  instances: 1
-#automatic_scaling:
-#  min_num_instances: 1
-#  max_num_instances: 5
-#  cool_down_period_sec: 120
-#  cpu_utilization:
-#    target_utilization: 0.5
-#  target_concurrent_requests: 10

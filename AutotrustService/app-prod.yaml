@@ -1,0 +1,18 @@
+runtime: custom
+env: flex
+service: autotrust-service
+network:
+  name: projects/awr-common-services-prod/global/networks/awr-common-vpc-prod
+  subnetwork_name: common-subnet-prod
+env_variables:
+  GCP_PROJECT_SEC_MAN: 'awr-java-services'
+  DMZ_URL: 'https://autotrust-proxy-dot-awr-java-services.ew.r.appspot.com/AutotrustProxy/resources'
+  DB_SCHEMA_NAME: 'XXMOBOMS'
+  DB_CONNECTION_STRING: 'jdbc:oracle:thin:@10.6.49.150:1521:APRD1'
+automatic_scaling:
+  min_num_instances: 1
+  max_num_instances: 3
+  cool_down_period_sec: 120
+  cpu_utilization:
+    target_utilization: 0.7
+  target_concurrent_requests: 20
