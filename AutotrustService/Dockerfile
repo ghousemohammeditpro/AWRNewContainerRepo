@@ -1,4 +1,4 @@
-FROM openjdk:jre-alpine
+FROM openjdk:8u282-jre
 
 COPY target/autotrustservice-thorntail.jar /opt/autotrustservice-thorntail.jar
 

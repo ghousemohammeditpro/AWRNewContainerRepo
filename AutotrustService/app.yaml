@@ -5,5 +5,17 @@ network:
   name: projects/awr-ci-poc/global/networks/awr-ci-poc-vpc-network
   #subnetwork_name: java-test
 env_variables:
-   MY_VAR_COLOR: 'blue1234'
-   DMZ_URL: 'http://localhost:7101/AutotrustProxy/resources'
+  GCP_PROJECT_SEC_MAN: 'awr-test-autotrust'
+  DMZ_URL: 'https://autotrust-proxy.test.awr-api.com/AutotrustProxy/resources'
+  DB_SCHEMA_NAME: 'XXMOBOMS'
+  DB_CONNECTION_STRING: 'jdbc:oracle:thin:@172.22.15.39:1521:ATST1'
+# manual scaling is not required in production
+manual_scaling:
+ instances: 1
+#automatic_scaling:
+#  min_num_instances: 1
+#  max_num_instances: 5
+#  cool_down_period_sec: 120
+#  cpu_utilization:
+#    target_utilization: 0.5
+#  target_concurrent_requests: 10

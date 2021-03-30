@@ -25,11 +25,11 @@ public class ChangeMobileStep1Util {
         PropertiesUtil propUtil = new PropertiesUtil();
       
         String retVal = null;
-        String soapEndpointUrl = propUtil.getPropertyValue("ENRICH_WSDL");
+        String soapEndpointUrl = System.getenv("ENRICH_WSDL");
             //"http://awrbloooomdevserver.com/enrich/ws/EnrichAPI.asmx";
             
         
-        String soapAction = propUtil.getPropertyValue("CHNG_MOBILE_STEP1_ACTION");
+        String soapAction = System.getenv("CHNG_MOBILE_STEP1_ACTION");
             //"http://tempuri.org/login";
         System.out.println("soapAction is : "+soapAction);
             

@@ -24,11 +24,11 @@ public class LoginUtil {
         PropertiesUtil propUtil = new PropertiesUtil();
       
         String retVal = null;
-        String soapEndpointUrl = propUtil.getPropertyValue("ENRICH_WSDL");
+        String soapEndpointUrl = System.getenv("ENRICH_WSDL");
             //"http://awrbloooomdevserver.com/enrich/ws/EnrichAPI.asmx";
             
         
-        String soapAction = propUtil.getPropertyValue("LOGIN_ACTION");
+        String soapAction = System.getenv("LOGIN_ACTION");
             //"http://tempuri.org/login";
             
                 

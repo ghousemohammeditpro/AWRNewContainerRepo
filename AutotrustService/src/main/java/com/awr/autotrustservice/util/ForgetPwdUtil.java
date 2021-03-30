@@ -31,10 +31,10 @@ public class ForgetPwdUtil {
             PropertiesUtil propUtil = new PropertiesUtil();
           
             String retVal = null;
-            String soapEndpointUrl = propUtil.getPropertyValue("ENRICH_WSDL");
+            String soapEndpointUrl = System.getenv("ENRICH_WSDL");
                 //"http://awrbloooomdevserver.com/enrich/ws/EnrichAPI.asmx";
             
-            String soapAction = propUtil.getPropertyValue("FORGOT_PWD_ACTION");
+            String soapAction = System.getenv("FORGOT_PWD_ACTION");
                // "http://tempuri.org/forgotPassword";
                     
             

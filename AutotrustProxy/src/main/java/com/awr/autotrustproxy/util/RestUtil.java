@@ -43,6 +43,7 @@ public class RestUtil {
 
             //added new code to get authorization from App.YAML
             authorization = System.getenv("authorization");
+            System.out.println("authorization: "+authorization);
 
         } catch (Exception e) {
             e.printStackTrace();

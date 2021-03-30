@@ -16,11 +16,11 @@ public class NotificationAuditLogger {
     }
     public void callAudit(LogData logData) {
       
+        //commented as part of GCP migration
+        // PropertiesUtil propUtil= new PropertiesUtil();
+        // String soapEndpointUrl = System.getenv("soapUrlLogger");
         
-        PropertiesUtil propUtil= new PropertiesUtil();
-        String soapEndpointUrl = propUtil.getPropertyValue("soapUrlLogger");
-        
-        callSoapWebService(soapEndpointUrl,logData);
+        // callSoapWebService(soapEndpointUrl,logData);
     }
     
     
