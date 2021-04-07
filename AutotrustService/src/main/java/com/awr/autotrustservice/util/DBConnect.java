@@ -24,16 +24,16 @@ public class DBConnect {
             TimeZone timeZone = TimeZone.getTimeZone("Asia/Dubai");
             TimeZone.setDefault(timeZone);
             //changing the databse connectivity from datasource to JDBC at the time of GCP migration
-            if(conn==null || conn.isClosed()){
+            //if(conn==null || conn.isClosed()){
                 //step1 load the driver class
                 Class.forName("oracle.jdbc.driver.OracleDriver");
                 //step2 create  the connection object
                 String secretPwd=SecretsReader.getSecret(schemaName);
                     conn=DriverManager.getConnection(
                         dbServerConnectionString,schemaName,secretPwd);
-            }else{
-                return conn;
-            }
+            // }else{
+            //     return conn;
+            // }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -43,7 +43,7 @@ public class DBConnect {
     public static void closeConnection(Connection con) {
         if (con != null) {
             try {
-                //con.close(); //no need to close the connection in GCP to avoid multiple connections from secret manager
+                con.close(); //no need to close the connection in GCP to avoid multiple connections from secret manager
             } catch (Exception e) {
                 e.printStackTrace();
             }
