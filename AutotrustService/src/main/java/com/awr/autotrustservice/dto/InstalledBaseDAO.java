@@ -7,6 +7,7 @@ import com.awr.autotrustservice.util.Utils;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import oracle.jdbc.OracleConnection;
 import java.sql.ResultSet;
 
 import oracle.jdbc.OracleTypes;
@@ -27,6 +28,8 @@ public class InstalledBaseDAO {
         CallableStatement stmt = null;
         ResultSet resultSet = null;
         connection = DBConnect.getConnection();
+        OracleConnection oconn = null;
+        oconn = DBConnect.getConnection(connection);
         try {
             /* if (Utils.isNullOrEmpty(request.getInstanceID())) {
                 response.setErrorMessage("Invalid Instance-ID");
@@ -62,9 +65,9 @@ public class InstalledBaseDAO {
                 if (request.getInstalledBaseList() != null && request.getInstalledBaseList().length>0) {
                     
                     @SuppressWarnings("deprecation")
-                    StructDescriptor structdesc = StructDescriptor.createDescriptor("APPS.VRIBRECORD", connection);
+                    StructDescriptor structdesc = StructDescriptor.createDescriptor("APPS.VRIBRECORD", oconn);
                     @SuppressWarnings("deprecation")
-                    ArrayDescriptor arraydesc = ArrayDescriptor.createDescriptor("APPS.VRIBTABLE", connection);
+                    ArrayDescriptor arraydesc = ArrayDescriptor.createDescriptor("APPS.VRIBTABLE", oconn);
                     int listSize = request.getInstalledBaseList().length;
                     
                     Object[] colunmsArray = new Object[44]; // no of colunms
@@ -120,13 +123,13 @@ public class InstalledBaseDAO {
                         colunmsArray[43] = Utils.isNullOrEmpty(IBObject.getAttribute15()) ? null : IBObject.getAttribute15(); 
                         
                         @SuppressWarnings("deprecation")
-                        STRUCT oracle_record = new STRUCT(structdesc, connection, colunmsArray);
+                        STRUCT oracle_record = new STRUCT(structdesc, oconn, colunmsArray);
                         rowsArray[i] = oracle_record;
                         IBObject = null;
                     }
 
                     @SuppressWarnings("deprecation")
-                    ARRAY oracleArray = new ARRAY(arraydesc, connection, rowsArray);
+                    ARRAY oracleArray = new ARRAY(arraydesc, oconn, rowsArray);
                     stmt.setObject(5, oracleArray);
                     
                 }

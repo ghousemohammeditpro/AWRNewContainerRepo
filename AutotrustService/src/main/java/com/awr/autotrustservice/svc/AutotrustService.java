@@ -83,6 +83,7 @@ import com.google.gson.GsonBuilder;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import oracle.jdbc.OracleConnection;
 
 import java.sql.Date;
 import java.sql.ResultSet;
@@ -384,7 +385,9 @@ public class AutotrustService {
                                       "image_url_pattern, \n"+
                                       "vehicle_location, \n"+
                                       "vehicle_gender, \n"+
-                                      "trim \n"+
+                                      "trim, \n"+
+                                      "image_processed_flag, \n"+
+                                      "no_of_images_processed \n"+
                                       "FROM \n"+
                                       "XXDMV_CPO_DEALER_VEHICLES_V";
             
@@ -471,7 +474,12 @@ public class AutotrustService {
                     veh.setAttribute3(rs.getString("attribute3")!=null ? rs.getString("attribute3") : "");
                     veh.setAttribute4(rs.getString("attribute4")!=null ? rs.getString("attribute4") : "");
                     veh.setAttribute5(rs.getString("attribute5")!=null ? rs.getString("attribute5") : "");
-                    veh.setNoOfImages(rs.getString("no_of_images")!=null ? rs.getString("no_of_images") : "");
+                    //START: NO_OF_IMAGES attribute value should be replaced with NO_OF_IMAGES_PROCESSED in case of any issue with Oracle image scheduler.
+                    //veh.setNoOfImages(rs.getString("no_of_images")!=null ? rs.getString("no_of_images") : "");
+                    //veh.setNoOfImages((rs.getString("no_of_images_processed")!=null && rs.getString("no_of_images_processed")!="0" && rs.getString("no_of_images_processed")!="" )? String.valueOf(Integer.parseInt(rs.getString("no_of_images_processed"))-1) : "");
+                    veh.setNoOfImages((rs.getString("no_of_images_processed")!=null && rs.getString("no_of_images_processed")!="0" && rs.getString("no_of_images_processed")!="" )? rs.getString("no_of_images_processed") : "");//View was already showing the same image count so no need to subtract.
+                    //END: NO_OF_IMAGES attribute value should be replaced with NO_OF_IMAGES_PROCESSED in case of any issue with Oracle image scheduler.
+
                     veh.setSpecialOffer_Flag(rs.getString("special_offer_flag")!=null ? rs.getString("special_offer_flag") : "");
                     veh.setInspectReportUrl(rs.getString("inspect_report_url")!=null ? rs.getString("inspect_report_url") : "");
                     veh.setServiceReportUrl(rs.getString("service_report_url")!=null ? rs.getString("service_report_url") : "");
@@ -3018,6 +3026,8 @@ public class AutotrustService {
         String successResponse = null;
         GenericResponse okExecuteResponse = new GenericResponse();
         conn = DBConnect.getConnection();
+        OracleConnection oconn = null;
+        oconn = DBConnect.getConnection(conn);
         CallableStatement stmt = null;
         ResultSet rs = null;
         //where to pass vendor value??
@@ -3048,9 +3058,9 @@ public class AutotrustService {
                 System.out.println("req addons not empty");
 
                     @SuppressWarnings("deprecation")
-                    StructDescriptor structdesc = StructDescriptor.createDescriptor("APPS.RESERVATION_VAL_REC_TYPE", conn);
+                    StructDescriptor structdesc = StructDescriptor.createDescriptor("APPS.RESERVATION_VAL_REC_TYPE", oconn);
                     @SuppressWarnings("deprecation")
-                    ArrayDescriptor arraydesc = ArrayDescriptor.createDescriptor("APPS.RES_LINE_TBL", conn);
+                    ArrayDescriptor arraydesc = ArrayDescriptor.createDescriptor("APPS.RES_LINE_TBL", oconn);
                 int listSize = req.getAddons().length;
                 
                 
@@ -3081,7 +3091,7 @@ public class AutotrustService {
                     }
 
                         @SuppressWarnings("deprecation")
-                        STRUCT addon_record = new STRUCT(structdesc, conn, addonRecord);
+                        STRUCT addon_record = new STRUCT(structdesc, oconn, addonRecord);
                     rowsArray[i] = addon_record;
                     addonObject = null;
                 }
@@ -3092,7 +3102,7 @@ public class AutotrustService {
                 }
 
                     @SuppressWarnings("deprecation")
-                    ARRAY oracleArray = new ARRAY(arraydesc, conn, rowsArray);
+                    ARRAY oracleArray = new ARRAY(arraydesc, oconn, rowsArray);
                 System.out.println("addon array length is : "+rowsArray.length);
                 stmt.setObject(1, oracleArray);
 //                stmt.setObject("p_res_line_tbl", oracleArray);
@@ -3804,7 +3814,9 @@ public class AutotrustService {
                                       "image_url_pattern, \n"+
                                       "vehicle_location, \n"+
                                       "vehicle_gender, \n"+
-                                      "trim \n"+
+                                      "trim, \n"+
+                                      "image_processed_flag, \n"+
+                                      "no_of_images_processed \n"+
                                       "FROM \n"+
                                       "XXDMV_CPO_DEALER_VEHICLES_V2";
             
@@ -3890,7 +3902,11 @@ public class AutotrustService {
                     veh.setAttribute3(rs.getString("attribute3")!=null ? rs.getString("attribute3") : "");
                     veh.setAttribute4(rs.getString("attribute4")!=null ? rs.getString("attribute4") : "");
                     veh.setAttribute5(rs.getString("attribute5")!=null ? rs.getString("attribute5") : "");
-                    veh.setNoOfImages(rs.getString("no_of_images")!=null ? rs.getString("no_of_images") : "");
+                    //START: NO_OF_IMAGES attribute value should be replaced with NO_OF_IMAGES_PROCESSED in case of any issue with Oracle image scheduler.
+                    //veh.setNoOfImages(rs.getString("no_of_images")!=null ? rs.getString("no_of_images") : "");
+                    //veh.setNoOfImages((rs.getString("no_of_images_processed")!=null && rs.getString("no_of_images_processed")!="0" && rs.getString("no_of_images_processed")!="" )? String.valueOf(Integer.parseInt(rs.getString("no_of_images_processed"))-1) : "");
+                    veh.setNoOfImages((rs.getString("no_of_images_processed")!=null && rs.getString("no_of_images_processed")!="0" && rs.getString("no_of_images_processed")!="" )? rs.getString("no_of_images_processed") : "");//View was already showing the same image count so no need to subtract.
+                    //END: NO_OF_IMAGES attribute value should be replaced with NO_OF_IMAGES_PROCESSED in case of any issue with Oracle image scheduler.
                     veh.setSpecialOffer_Flag(rs.getString("special_offer_flag")!=null ? rs.getString("special_offer_flag") : "");
                     veh.setInspectReportUrl(rs.getString("inspect_report_url")!=null ? rs.getString("inspect_report_url") : "");
                     veh.setServiceReportUrl(rs.getString("service_report_url")!=null ? rs.getString("service_report_url") : "");

@@ -8,14 +8,29 @@ env_variables:
   GCP_PROJECT_SEC_MAN: 'awr-java-services'
   DMZ_URL: 'https://autotrust-proxy-dot-awr-java-services.ew.r.appspot.com/AutotrustProxy/resources'
   DB_SCHEMA_NAME: 'XXMOBOMS'
-  DB_CONNECTION_STRING: 'jdbc:oracle:thin:@10.6.49.150:1521:APRD1'
+  DB_CONNECTION_STRING: 'jdbc:oracle:thin:@10.6.49.150:1521:APRD'
+  DS_INITIAL_SIZE: 0
+  DS_MIN_IDLE: 0
+  DS_MAX_IDLE: 50
+  DS_MAX_TOTAL: 1000
+  DS_MAX_OPEN_PREP_STATEMENT: 1000
+  TIME_BETWEEN_EVICTOR_RUNS_IN_MILLIS: 5000
+  MAX_CONN_LIEFTIME_MILLIS: 1800000
+  MAX_WAIT_MILLIS: 120000
 automatic_scaling:
-  min_num_instances: 1
-  max_num_instances: 3
+  min_num_instances: 2
+  max_num_instances: 10
   cool_down_period_sec: 120
   cpu_utilization:
-    target_utilization: 0.7
-  target_concurrent_requests: 20
+    target_utilization: 0.8
+  target_concurrent_requests: 100
 resources:
   cpu: 1
   memory_gb: 4
+liveness_check:
+  path: "/AutotrustService/resources/heartbeat/dbping"
+  check_interval_sec: 300
+  timeout_sec: 10
+  failure_threshold: 4
+  success_threshold: 2
+  initial_delay_sec: 1200

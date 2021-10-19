@@ -8,6 +8,7 @@ import com.awr.autotrustservice.util.Utils;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import oracle.jdbc.OracleConnection;
 
 import oracle.jdbc.OracleTypes;
 
@@ -23,6 +24,8 @@ public class CustomerDAO {
         Connection conn = null;
         CallableStatement stmt = null;
         conn = DBConnect.getConnection();
+        OracleConnection oconn = null;
+        oconn = DBConnect.getConnection(conn);
       try {
           //Customer
 
@@ -70,10 +73,10 @@ public class CustomerDAO {
 
                  
                 @SuppressWarnings("deprecation")
-                StructDescriptor structdesc = StructDescriptor.createDescriptor("XXFO_CUSTOMER_REC", conn);
-                struct = new STRUCT(structdesc, conn, customer_array);                                
-                /* ArrayDescriptor arrayDescriptor = ArrayDescriptor.createDescriptor("XXFO_CUSTOMER_REC", conn);
-                ARRAY oracle_array = new ARRAY(arrayDescriptor, conn, customer_array); */
+                StructDescriptor structdesc = StructDescriptor.createDescriptor("XXFO_CUSTOMER_REC", oconn);
+                struct = new STRUCT(structdesc, oconn, customer_array);                                
+                /* ArrayDescriptor arrayDescriptor = ArrayDescriptor.createDescriptor("XXFO_CUSTOMER_REC", oconn);
+                ARRAY oracle_array = new ARRAY(arrayDescriptor, oconn, customer_array); */
 
             }
               // Customer Conacts
@@ -112,8 +115,8 @@ public class CustomerDAO {
                   contact_array[19] = Utils.isNullOrEmpty(contact.getContactLat()) ? null : Double.valueOf(contact.getContactLat()); //Contact Latitude
                   contact_array[20] = Utils.isNullOrEmpty(contact.getContactLong()) ? null : Double.valueOf(contact.getContactLong());//Contact Longitude
 
-                  StructDescriptor structContactdesc = StructDescriptor.createDescriptor("XXFO_CUST_CONTACT_REC", conn);
-                  structContact = new STRUCT(structContactdesc, conn, contact_array);
+                  StructDescriptor structContactdesc = StructDescriptor.createDescriptor("XXFO_CUST_CONTACT_REC", oconn);
+                  structContact = new STRUCT(structContactdesc, oconn, contact_array);
           }
            
            if (mode.equals("INSERT")) {

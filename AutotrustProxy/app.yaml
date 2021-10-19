@@ -10,3 +10,9 @@ env_variables:
   MAIN_URL: 'https://autotrust-service-dot-awr-test-autotrust.ew.r.appspot.com/AutotrustService/resources'
   AUTOTRUST_SVC_URL_RESERVE: 'https://stage.autotrustuae.com/customapi/AutotrustKenticoApis/ReserveVehicleInKentico'
   AUTOTRUST_SVC_URL_NOTIFICATION: 'https://stage.autotrustuae.com/customapi/PushNotifications/SendNotifications'
+resources:
+  cpu: 1
+  memory_gb: 2
+# manual scaling is not required in production
+manual_scaling:
+  instances: 1

@@ -39,6 +39,7 @@ import com.google.gson.GsonBuilder;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import oracle.jdbc.OracleConnection;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -683,6 +684,8 @@ public class ServiceApis {
         String successResponse = null;
         GenericResponse okExecuteResponse = new GenericResponse();
         conn = DBConnect.getConnection();
+        OracleConnection oconn = null;
+        oconn = DBConnect.getConnection(conn);
         CallableStatement stmt = null;
         ResultSet rs = null;
         //where to pass vendor value??
@@ -762,8 +765,8 @@ public class ServiceApis {
                 makanak_record[34] = req.getPreferredTime();
                     
             }
-            StructDescriptor structContactdesc = StructDescriptor.createDescriptor("APPS.AUTOTRUST_MAKANAK_RECORD", conn);
-            makanakRec = new STRUCT(structContactdesc, conn, makanak_record);
+            StructDescriptor structContactdesc = StructDescriptor.createDescriptor("APPS.AUTOTRUST_MAKANAK_RECORD", oconn);
+            makanakRec = new STRUCT(structContactdesc, oconn, makanak_record);
             
             stmt.setObject(1, makanakRec);
             stmt.registerOutParameter(2, OracleTypes.VARCHAR); 
@@ -821,6 +824,8 @@ public class ServiceApis {
         String successResponse = null;
         GenericResponse okExecuteResponse = new GenericResponse();
         conn = DBConnect.getConnection();
+        OracleConnection oconn = null;
+        oconn = DBConnect.getConnection(conn);
         CallableStatement stmt = null;
         ResultSet rs = null;
         //where to pass vendor value??
@@ -903,8 +908,8 @@ public class ServiceApis {
                 booking_record[39] = req.getPreferredTime();
                     
             }
-            StructDescriptor structContactdesc = StructDescriptor.createDescriptor("APPS.AUTOTRUST_EABOOKING_RECORD", conn);
-            bookingRec = new STRUCT(structContactdesc, conn, booking_record);
+            StructDescriptor structContactdesc = StructDescriptor.createDescriptor("APPS.AUTOTRUST_EABOOKING_RECORD", oconn);
+            bookingRec = new STRUCT(structContactdesc, oconn, booking_record);
             
             stmt.setObject(1, bookingRec);
             stmt.setString(2, req.getBookingType());
