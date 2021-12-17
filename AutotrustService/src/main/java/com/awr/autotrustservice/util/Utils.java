@@ -12,13 +12,13 @@ import java.util.List;
 import java.util.Queue;
 import java.util.TimeZone;
 
-import org.apache.log4j.Logger;
+//import org.apache.log4j.Logger;
 
 public class Utils {
     public Utils() {
         super();
     }
-    private static Logger logger = Logger.getLogger(Utils.class);
+    //private static Logger logger = Logger.getLogger(Utils.class);
     
     private static String DEBUG_MODE = "OFF";
     
@@ -35,8 +35,10 @@ public class Utils {
     
     public static void writeExtraDebugInfo(String moduleInfo, String logText)
     {
-        if(DEBUG_MODE.equalsIgnoreCase("DTL"))
-            logger.debug(String.format("[%s] %s", moduleInfo, logText));
+        if(DEBUG_MODE.equalsIgnoreCase("DTL")){
+
+            //logger.debug(String.format("[%s] %s", moduleInfo, logText));
+        }
     }
         
     public static String formatException(Exception e)
@@ -160,7 +162,7 @@ public class Utils {
                 }
                 catch(Exception e)
                 {
-                        logger.debug(formatException(e));
+                        //logger.debug(formatException(e));
                 }
 
                 return sbHexVal.toString();

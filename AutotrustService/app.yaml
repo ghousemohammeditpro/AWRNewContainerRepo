@@ -12,7 +12,8 @@ env_variables:
   #Service name has to be given after / in below connection string
   #DB_CONNECTION_STRING: 'jdbc:oracle:thin:@172.22.16.4:1521/ADEV' #ACDEV
   #DB_CONNECTION_STRING: 'jdbc:oracle:thin:@//10.6.47.150:1521/ebs_DEV' #AXDEV
-  DB_CONNECTION_STRING: 'jdbc:oracle:thin:@10.6.48.150:1521/ebs_AXTST' #AXTST
+  #DB_CONNECTION_STRING: 'jdbc:oracle:thin:@10.6.48.150:1521/ebs_AXTST' #AXTST
+  DB_CONNECTION_STRING: 'jdbc:oracle:thin:@172.22.15.105:1521/ATST' #ACTST
   DS_INITIAL_SIZE: 0
   DS_MIN_IDLE: 0
   DS_MAX_IDLE: 50
