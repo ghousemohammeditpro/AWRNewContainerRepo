@@ -1,6 +1,7 @@
 package com.awr.autotrustproxy.proxysvc;
 
 import com.awr.autotrustproxy.request.CreateSFLeadRequest;
+import com.awr.autotrustproxy.request.CreateSFLeadRequestV1;
 import com.awr.autotrustproxy.request.GetModelsRequest;
 import com.awr.autotrustproxy.request.GetStockRequest;
 import com.awr.autotrustproxy.request.SendMailRequest;
@@ -336,6 +337,48 @@ public class ChatbotProxyService {
     return response;
     }
     
+
+    @PUT
+    @Path("createLeadV1")
+    public CreateSFLeadResponse createLeadV1(CreateSFLeadRequestV1 req, @HeaderParam("appName") String appName) {
+    CreateSFLeadResponse response = new CreateSFLeadResponse();
+
+    PropertiesUtil propUtil = new PropertiesUtil();
+    Gson gson = new Gson();
+
+    try {
+            if(appName!=null && appName!="" && !appName.isEmpty()){
+            if(req.getAppSourceName()!=null && req.getAppSourceName()!="" && req.getComments()!=null && req.getComments()!=""){
+            String serviceURL = System.getenv("MAIN_URL")+"/chatbot/createLeadV1";
+            String responseString = RestUtil.callPutServiceWithAppName(serviceURL, gson.toJson(req), appName);
+            
+            System.out.println("response from internal create lead service is : "+responseString);
+          
+            if(responseString!=null){
+                
+                response = gson.fromJson(responseString, CreateSFLeadResponse.class);
+
+            }
+            else{
+                System.out.println("communication error in update deal activity");
+                }
+            }else{
+                response.setRetCode("E");
+                response.setRetMsg("mandatory params cannot be null or empty");
+            }
+            }else{
+                response.setRetCode("E");
+                response.setRetMsg("appName cannot be null or empty");
+            }
+    } catch (Exception e) {
+        e.printStackTrace();
+    } finally {
+    }
+
+    return response;
+    }
+    
+
     @PUT
     @Path("sendMail")
     @Produces("application/json")
