@@ -463,7 +463,8 @@ public class AutotrustService {
                     veh.setOpenFlag(rs.getString("open_flag")!=null ? rs.getString("open_flag") : "");
                     veh.setReservationId(rs.getString("reservation_id")!=null ? rs.getString("reservation_id") : "");
                     veh.setOfferExpiryDate(rs.getString("offer_expiry_date")!=null ? rs.getString("offer_expiry_date") : "");
-                    veh.setNewOfferPrice(rs.getString("new_offer_price")!=null ? rs.getString("new_offer_price") : "");
+                    //veh.setNewOfferPrice(rs.getString("new_offer_price")!=null ? rs.getString("new_offer_price") : "");
+                    veh.setNewOfferPrice(""); //As per request 67631 of Mishal to remove the offer price
                     veh.setInventoryItemId(rs.getString("inventory_item_id")!=null ? rs.getString("inventory_item_id") : "");
                     veh.setStockType(rs.getString("stock_type")!=null ? rs.getString("stock_type") : "");
                     veh.setImageUrlName(rs.getString("image_url_name")!=null ? rs.getString("image_url_name") : "");
@@ -3628,7 +3629,8 @@ public class AutotrustService {
                     veh.setOpenFlag(rs.getString("open_flag")!=null ? rs.getString("open_flag") : "");
                     veh.setReservationId(rs.getString("reservation_id")!=null ? rs.getString("reservation_id") : "");
                     veh.setOfferExpiryDate(rs.getString("offer_expiry_date")!=null ? rs.getString("offer_expiry_date") : "");
-                    veh.setNewOfferPrice(rs.getString("new_offer_price")!=null ? rs.getString("new_offer_price") : "");
+                    //veh.setNewOfferPrice(rs.getString("new_offer_price")!=null ? rs.getString("new_offer_price") : "");
+                    veh.setNewOfferPrice(""); //As per request 67631 of Mishal to remove the offer price
                     veh.setInventoryItemId(rs.getString("inventory_item_id")!=null ? rs.getString("inventory_item_id") : "");
                     veh.setStockType(rs.getString("stock_type")!=null ? rs.getString("stock_type") : "");
                     veh.setImageUrlName(rs.getString("image_url_name")!=null ? rs.getString("image_url_name") : "");
