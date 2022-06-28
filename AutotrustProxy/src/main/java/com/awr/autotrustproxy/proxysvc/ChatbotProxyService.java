@@ -25,6 +25,8 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import java.util.regex.Matcher; 
+import java.util.regex.Pattern;
 
 @Path("chatbotProxy")
 @Consumes("application/json")
@@ -347,25 +349,35 @@ public class ChatbotProxyService {
     Gson gson = new Gson();
 
     try {
+        //checking the 
             if(appName!=null && appName!="" && !appName.isEmpty()){
-            if(req.getAppSourceName()!=null && req.getAppSourceName()!="" && req.getComments()!=null && req.getComments()!=""){
-            String serviceURL = System.getenv("MAIN_URL")+"/chatbot/createLeadV1";
-            String responseString = RestUtil.callPutServiceWithAppName(serviceURL, gson.toJson(req), appName);
-            
-            System.out.println("response from internal create lead service is : "+responseString);
-          
-            if(responseString!=null){
-                
-                response = gson.fromJson(responseString, CreateSFLeadResponse.class);
+                if(req.getAppSourceName()!=null && req.getAppSourceName()!="" && req.getComments()!=null && req.getComments()!=""){
+                    //checking the special character as per PTVA report
+                    Pattern pattern = Pattern.compile("[^a-zA-Z0-9]");
+                    Matcher matcher = pattern.matcher(req.getFname()+req.getLname());
+                    boolean isStringContainsSpecialCharacter = matcher.find();
+                    if(isStringContainsSpecialCharacter){
+                        response.setRetCode("E");
+                        response.setRetMsg("Special characters are not allowed. Please provide proper input.");
+                    }else{    
+                        String serviceURL = System.getenv("MAIN_URL")+"/chatbot/createLeadV1";
+                        String responseString = RestUtil.callPutServiceWithAppName(serviceURL, gson.toJson(req), appName);
+                        
+                        System.out.println("response from internal create lead service is : "+responseString);
+                    
+                        if(responseString!=null){
+                            
+                            response = gson.fromJson(responseString, CreateSFLeadResponse.class);
 
-            }
-            else{
-                System.out.println("communication error in update deal activity");
+                        }
+                        else{
+                            System.out.println("communication error in update deal activity");
+                            }
+                    }
+                }else{
+                    response.setRetCode("E");
+                    response.setRetMsg("mandatory params cannot be null or empty");
                 }
-            }else{
-                response.setRetCode("E");
-                response.setRetMsg("mandatory params cannot be null or empty");
-            }
             }else{
                 response.setRetCode("E");
                 response.setRetMsg("appName cannot be null or empty");
