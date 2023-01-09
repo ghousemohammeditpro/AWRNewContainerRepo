@@ -492,6 +492,12 @@ public class AutotrustService {
                     veh.setVehicleGender(rs.getString("vehicle_gender")!=null ? rs.getString("vehicle_gender") : "");
                     veh.setTrim(rs.getString("trim")!=null ? rs.getString("trim") : "");
                     
+                    //condition to change the Image URL from exvault to Imagekit URL in case ImageIrl is blank:
+                    if(String.valueOf(veh.getImageUrlName()).equalsIgnoreCase("") && !(String.valueOf(veh.getNoOfImages()).equalsIgnoreCase(""))){
+                        veh.setImageUrlName("https://ik.imagekit.io/ct2r6oxbcn/"+veh.getSerialNumber());
+                        veh.setThumbnailUrlName(veh.getImageUrlName()+"_0.jpg");
+                    }
+
                     if(rs.getString("image_url_pattern")!=null && rs.getString("image_url_pattern")!=""){
                         String pattern = rs.getString("image_url_pattern");
                         
