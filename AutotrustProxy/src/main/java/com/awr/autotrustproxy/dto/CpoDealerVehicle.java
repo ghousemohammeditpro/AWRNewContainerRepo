@@ -92,6 +92,18 @@ public class CpoDealerVehicle {
     private String trim;
     private String vehicleGender;
 
+    //new param for NXT website
+    private String bhp;
+    private String airBags;
+    private String remoteEngineStart;
+    private String usbAux;
+    private String appleCarPlayAndroid;
+    private String accidentHistory;
+    private String driveType;
+    private String specs;
+    private String noOfSeats;
+    private String noOfDoors;
+
     public void setItemCode(String itemCode) {
         this.itemCode = itemCode;
     }
@@ -771,4 +783,87 @@ public class CpoDealerVehicle {
     public String getVehicleGender() {
         return vehicleGender;
     }
+
+
+    public String getBhp() {
+        return this.bhp;
+    }
+
+    public void setBhp(String bhp) {
+        this.bhp = bhp;
+    }
+
+    public String getAirBags() {
+        return this.airBags;
+    }
+
+    public void setAirBags(String airBags) {
+        this.airBags = airBags;
+    }
+
+    public String getRemoteEngineStart() {
+        return this.remoteEngineStart;
+    }
+
+    public void setRemoteEngineStart(String remoteEngineStart) {
+        this.remoteEngineStart = remoteEngineStart;
+    }
+
+    public String getUsbAux() {
+        return this.usbAux;
+    }
+
+    public void setUsbAux(String usbAux) {
+        this.usbAux = usbAux;
+    }
+
+    public String getAppleCarPlayAndroid() {
+        return this.appleCarPlayAndroid;
+    }
+
+    public void setAppleCarPlayAndroid(String appleCarPlayAndroid) {
+        this.appleCarPlayAndroid = appleCarPlayAndroid;
+    }
+
+    public String getAccidentHistory() {
+        return this.accidentHistory;
+    }
+
+    public void setAccidentHistory(String accidentHistory) {
+        this.accidentHistory = accidentHistory;
+    }
+
+    public String getDriveType() {
+        return this.driveType;
+    }
+
+    public void setDriveType(String driveType) {
+        this.driveType = driveType;
+    }
+
+    public String getSpecs() {
+        return this.specs;
+    }
+
+    public void setSpecs(String specs) {
+        this.specs = specs;
+    }
+
+    public String getNoOfSeats() {
+        return this.noOfSeats;
+    }
+
+    public void setNoOfSeats(String noOfSeats) {
+        this.noOfSeats = noOfSeats;
+    }
+
+    public String getNoOfDoors() {
+        return this.noOfDoors;
+    }
+
+    public void setNoOfDoors(String noOfDoors) {
+        this.noOfDoors = noOfDoors;
+    }
+
+
 }
