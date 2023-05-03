@@ -1,0 +1,39 @@
+runtime: custom
+env: flex
+service: autotrust-service
+network:
+  name: projects/awr-ci-poc/global/networks/awr-ci-poc-vpc-network
+  #subnetwork_name: java-test
+env_variables:
+  GCP_PROJECT_SEC_MAN: 'awr-test-autotrust'
+  DMZ_URL: 'https://autotrust-proxy-dot-awr-test-autotrust.ew.r.appspot.com/AutotrustProxy/resources'
+  DB_SCHEMA_NAME: 'XXMOBOMS'
+  #DB_CONNECTION_STRING: 'jdbc:oracle:thin:@172.22.15.39:1521:ATST1' #ACTST
+  #Service name has to be given after / in below connection string
+  #DB_CONNECTION_STRING: 'jdbc:oracle:thin:@172.22.16.4:1521/ADEV' #ACDEV
+  #DB_CONNECTION_STRING: 'jdbc:oracle:thin:@//10.6.47.150:1521/ebs_DEV' #AXDEV
+  #DB_CONNECTION_STRING: 'jdbc:oracle:thin:@10.6.48.150:1521/ebs_AXTST' #AXTST
+  DB_CONNECTION_STRING: 'jdbc:oracle:thin:@172.22.15.105:1521/ATST' #ACTST
+  #DB_CONNECTION_STRING: 'jdbc:oracle:thin:@172.25.41.20:1521/ebs_AXTST' #OCI_SCAN_AXTST
+  #DB_CONNECTION_STRING: 'jdbc:oracle:thin:@172.25.41.20:1521/ebs_APRD' #OCI_SCAN_DRYRUN
+  DS_INITIAL_SIZE: 0
+  DS_MIN_IDLE: 0
+  DS_MAX_IDLE: 50
+  DS_MAX_TOTAL: 1000
+  DS_MAX_OPEN_PREP_STATEMENT: 1000
+  TIME_BETWEEN_EVICTOR_RUNS_IN_MILLIS: 5000
+  MAX_CONN_LIEFTIME_MILLIS: 1800000
+  MAX_WAIT_MILLIS: 120000
+# manual scaling is not required in production
+manual_scaling:
+ instances: 1
+resources:
+  cpu: 1
+  memory_gb: 2
+liveness_check:
+  path: "/AutotrustService/resources/heartbeat/dbping"
+  check_interval_sec: 300
+  timeout_sec: 10
+  failure_threshold: 4
+  success_threshold: 2
+  initial_delay_sec: 600

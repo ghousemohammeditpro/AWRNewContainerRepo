@@ -1,0 +1,22 @@
+runtime: custom
+env: flex
+service: autotrust-proxy
+network:
+  name: projects/awr-common-services-prod/global/networks/awr-common-vpc-prod
+  subnetwork_name: common-subnet-prod
+env_variables:
+  authorization: 'WELCOME$1'
+  tokenValue: 'eyI1NzQ1NGM0MzRmNGQ0NTI0MzEiOiJIUzI1NiIsImFsZyI6IkhTMjU2In0.NTc0NTRjNDM0ZjRkNDUyNDMx.cGwN9jLGMJz53_jUP_eK3pOSmPHwIboE1OMyWUbPu-E'
+  MAIN_URL: 'https://autotrust-service-dot-awr-java-services.ew.r.appspot.com/AutotrustService/resources'
+  AUTOTRUST_SVC_URL_RESERVE: 'https://autotrustuae.com/customapi/AutotrustKenticoApis/ReserveVehicleInKentico'
+  AUTOTRUST_SVC_URL_NOTIFICATION: 'https://autotrustuae.com/customapi/PushNotifications/SendNotifications'
+automatic_scaling:
+  min_num_instances: 2
+  max_num_instances: 10
+  cool_down_period_sec: 120
+  cpu_utilization:
+    target_utilization: 0.8
+  target_concurrent_requests: 100
+resources:
+  cpu: 1
+  memory_gb: 3
