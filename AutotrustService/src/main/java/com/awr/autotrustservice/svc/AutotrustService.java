@@ -388,6 +388,16 @@ public class AutotrustService {
                                       "trim, \n"+
                                       "image_processed_flag, \n"+
                                       "no_of_images_processed \n"+
+                                      "BHP \n"+
+                                      "AIRBAGS \n"+
+                                      "REMOTE_ENGINE_START \n"+
+                                      "USB_AUX \n"+
+                                      "APPLE_CARPLAY_ANDROID \n"+
+                                      "ACCIDENT_HISTORY \n"+
+                                      "SPECS \n"+
+                                      "DRIVE_TYPE \n"+
+                                      "NO_OF_DOORS \n"+
+                                      "NO_OF_SEATS \n"+ 
                                       "FROM \n"+
                                       "XXDMV_CPO_DEALER_VEHICLES_V";
             
@@ -491,7 +501,25 @@ public class AutotrustService {
                     
                     veh.setVehicleGender(rs.getString("vehicle_gender")!=null ? rs.getString("vehicle_gender") : "");
                     veh.setTrim(rs.getString("trim")!=null ? rs.getString("trim") : "");
+
+                    //NXT changes
+                    veh.setBhp(rs.getString("BHP")!=null ? rs.getString("BHP") : "");
+                    veh.setAirBags(rs.getString("AIRBAGS")!=null ? rs.getString("AIRBAGS") : "");
+                    veh.setRemoteEngineStart(rs.getString("REMOTE_ENGINE_START")!=null ? rs.getString("REMOTE_ENGINE_START") : "");
+                    veh.setUsbAux(rs.getString("USB_AUX")!=null ? rs.getString("USB_AUX") : "");
+                    veh.setAppleCarPlayAndroid(rs.getString("APPLE_CARPLAY_ANDROID")!=null ? rs.getString("APPLE_CARPLAY_ANDROID") : "");
+                    veh.setAccidentHistory(rs.getString("ACCIDENT_HISTORY")!=null ? rs.getString("ACCIDENT_HISTORY") : "");
+                    veh.setSpecs(rs.getString("SPECS")!=null ? rs.getString("SPECS") : "");
+                    veh.setDriveType(rs.getString("DRIVE_TYPE")!=null ? rs.getString("DRIVE_TYPE") : "");
+                    veh.setNoOfDoors(rs.getString("NO_OF_DOORS")!=null ? rs.getString("NO_OF_DOORS") : "");
+                    veh.setNoOfSeats(rs.getString("NO_OF_SEATS")!=null ? rs.getString("NO_OF_SEATS") : "");
                     
+                    //condition to change the Image URL from exvault to Imagekit URL in case ImageIrl is blank:
+                    if(String.valueOf(veh.getImageUrlName()).equalsIgnoreCase("") && !(String.valueOf(veh.getNoOfImages()).equalsIgnoreCase(""))){
+                        veh.setImageUrlName("https://ik.imagekit.io/ct2r6oxbcn/"+veh.getSerialNumber());
+                        veh.setThumbnailUrlName(veh.getImageUrlName()+"_0.jpg");
+                    }
+
                     if(rs.getString("image_url_pattern")!=null && rs.getString("image_url_pattern")!=""){
                         String pattern = rs.getString("image_url_pattern");
                         
@@ -512,7 +540,9 @@ public class AutotrustService {
                     }else{
                         veh.setThumbnailImage("");
                     }
-                    if(veh.getVhlPrice()!=""){
+                    if((veh.getVhlPrice() !=null) && (veh.getVhlPrice()!="" && !(veh.getVhlPrice().equalsIgnoreCase("0")))){
+                        //Vehicle will be added only when it have price
+                        //if(veh.getVhlPrice()!=""&&veh.getVhlPrice()!=null&&veh.getVhlPrice().equalsIgnoreCase("")&&veh.getVhlPrice().equalsIgnoreCase("null")){
                         vehs.add(veh);  
                     }
                     
