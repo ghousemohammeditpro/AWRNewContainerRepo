@@ -540,7 +540,9 @@ public class AutotrustService {
                     }else{
                         veh.setThumbnailImage("");
                     }
-                    if(veh.getVhlPrice()!=""&&veh.getVhlPrice()!=null&&veh.getVhlPrice().equalsIgnoreCase("")&&veh.getVhlPrice().equalsIgnoreCase("null")){
+                    if((veh.getVhlPrice() !=null) && (veh.getVhlPrice()!="" && !(veh.getVhlPrice().equalsIgnoreCase("0")))){
+                        //Vehicle will be added only when it have price
+                        //if(veh.getVhlPrice()!=""&&veh.getVhlPrice()!=null&&veh.getVhlPrice().equalsIgnoreCase("")&&veh.getVhlPrice().equalsIgnoreCase("null")){
                         vehs.add(veh);  
                     }
                     
