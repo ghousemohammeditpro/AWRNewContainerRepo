@@ -518,7 +518,8 @@ public class AutotrustService {
                     }else{
                         veh.setThumbnailImage("");
                     }
-                    if(veh.getVhlPrice()!=""){
+                    if((veh.getVhlPrice() !=null) && (veh.getVhlPrice()!="" && !(veh.getVhlPrice().equalsIgnoreCase("0")))){
+                        //Vehicle will be added only when it have price
                         vehs.add(veh);  
                     }
                     
